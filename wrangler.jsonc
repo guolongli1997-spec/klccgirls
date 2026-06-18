@@ -29,7 +29,7 @@
     }
   ],
 
-  // ===== R2 BUCKET BINDING =====
+  // ===== D1 BUCKET BINDING =====
   "r2_buckets": [
     {
       "binding": "BUCKET",
