@@ -13,5 +13,16 @@
       "persist": true,
       "head_sampling_rate": 1
     }
+{name = "telegram-bot"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+BOT_TOKEN = "8571106564:AAEPU8Scs24zR2tE36KeBZWG-UrBPCVOlt0"
+CHANNEL_URL = "https://t.me/+AEYJNkeLS0dhOTQ9"
+
+[env.production]
+vars = { BOT_TOKEN = "8571106564:AAEPU8Scs24zR2tE36KeBZWG-UrBPCVOlt0" 
+}
   }
 }
