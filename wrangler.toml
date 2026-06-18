@@ -1,48 +1,61 @@
-name = "telegram-bot"
-main = "worker.js"
-compatibility_date = "2024-12-18"
-compatibility_flags = ["nodejs_compat"]
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "telegram-bot",
+  "main": "worker.js",
+  "compatibility_date": "2024-12-18",
+  "compatibility_flags": ["nodejs_compat"],
 
-# ===== OBSERVABILITY CONFIGURATION =====
-[observability]
-enabled = true
-head_sampling_rate = 1
+  // ===== OBSERVABILITY =====
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": true,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
+  },
 
-[observability.logs]
-enabled = true
-head_sampling_rate = 1
-persist = true
-invocation_logs = true
+  // ===== AI BINDING =====
+  "ai": [
+    {
+      "binding": "AI"
+    }
+  ],
 
-[observability.traces]
-enabled = true
-persist = true
-head_sampling_rate = 1
+  // ===== R2 BUCKET BINDING =====
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "telegram-bot-assets"
+    }
+  ],
 
-# ===== ENVIRONMENT VARIABLES =====
-[vars]
-BOT_TOKEN = "8571106564:AAEPU8Scs24zR2tE36KeBZWG-UrBPCVOlt0"
-CHANNEL_URL = "https://t.me/+AEYJNkeLS0dhOTQ9"
-AI_MODEL = "@cf/meta/llama-3-8b-instruct"
+  // ===== ENVIRONMENT VARIABLES (Non-secret) =====
+  "vars": {
+    "CHANNEL_URL": "https://t.me/+AEYJNkeLS0dhOTQ9",
+    "AI_MODEL": "@cf/meta/llama-3-8b-instruct",
+    "ACCOUNT_ID": "61e201b941702855eb07a25528d7c059"
+  },
 
-# ===== PRODUCTION ENVIRONMENT =====
-[env.production]
-vars = { 
-  BOT_TOKEN = "8571106564:AAEPU8Scs24zR2tE36KeBZWG-UrBPCVOlt0",
-  CHANNEL_URL = "https://t.me/+AEYJNkeLS0dhOTQ9",
-  AI_MODEL = "@cf/meta/llama-3-8b-instruct"
+  // ===== PRODUCTION ENVIRONMENT =====
+  "env": {
+    "production": {
+      "vars": {
+        "CHANNEL_URL": "https://t.me/+AEYJNkeLS0dhOTQ9",
+        "AI_MODEL": "@cf/meta/llama-3-8b-instruct",
+        "ACCOUNT_ID": "61e201b941702855eb07a25528d7c059"
+      },
+      "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1
+      }
+    }
+  }
 }
-[observability]
-enabled = false
-head_sampling_rate = 1
-
-[observability.logs]
-enabled = true
-head_sampling_rate = 1
-persist = true
-invocation_logs = true
-
-[observability.traces]
-enabled = true
-persist = true
-head_sampling_rate = 1
