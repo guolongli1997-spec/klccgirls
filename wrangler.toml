@@ -32,13 +32,18 @@ vars = {
   CHANNEL_URL = "https://t.me/+AEYJNkeLS0dhOTQ9",
   AI_MODEL = "@cf/meta/llama-3-8b-instruct"
 }
+[observability]
+enabled = false
+head_sampling_rate = 1
 
-# ===== AI BINDING =====
-[[ai]]
-binding = "AI"
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
 
-# ===== KV NAMESPACE (optional - for storing chat history) =====
-[[kv_namespaces]]
-binding = "CHAT_HISTORY"
-id = "your-kv-namespace-id"  # Create this in Cloudflare Dashboard
-preview_id = "your-kv-preview-id"
+[observability.traces]
+enabled = true
+persist = true
+head_sampling_rate = 1
+}
