@@ -1,0 +1,61 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/config-schema.json",
+  "name": "telegram-bot",
+  "main": "worker.js",
+  "compatibility_date": "2024-12-18",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // ===== OBSERVABILITY =====
+  "observability": {
+    "enabled": false,
+    "head_sampling_rate": 1,
+    "logs": {
+      "enabled": true,
+      "head_sampling_rate": 1,
+      "persist": true,
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": true,
+      "persist": true,
+      "head_sampling_rate": 1
+    }
+  },
+
+  // ===== AI BINDING =====
+  "ai": [
+    {
+      "binding": "AI"
+    }
+  ],
+
+  // ===== R2 BUCKET BINDING =====
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "telegram-bot-assets"
+    }
+  ],
+
+  // ===== ENVIRONMENT VARIABLES (Non-secret) =====
+  "vars": {
+    "CHANNEL_URL": "https://t.me/+AEYJNkeLS0dhOTQ9",
+    "AI_MODEL": "@cf/meta/llama-3-8b-instruct",
+    "ACCOUNT_ID": "61e201b941702855eb07a25528d7c059"
+  },
+
+  // ===== PRODUCTION ENVIRONMENT =====
+  "env": {
+    "production": {
+      "vars": {
+        "CHANNEL_URL": "https://t.me/+AEYJNkeLS0dhOTQ9",
+        "AI_MODEL": "@cf/meta/llama-3-8b-instruct",
+        "ACCOUNT_ID": "61e201b941702855eb07a25528d7c059"
+      },
+      "observability": {
+        "enabled": true,
+        "head_sampling_rate": 1
+      }
+    }
+  }
+}
