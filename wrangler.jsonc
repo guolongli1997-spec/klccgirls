@@ -72,7 +72,7 @@
       "custom_domain": true
     },
     {
-      "pattern": "www.klccgirls.site",
+      "pattern": "https://klccgirls.site",
       "custom_domain": true
     }
   ],
@@ -116,7 +116,7 @@
       "vars": {
         "CHANNEL_URL": "https://t.me/+AEYJNkeLS0dhOTQ9",
         "AI_MODEL": "@cf/meta/llama-3-8b-instruct",
-        "SITE_URL": "https://klccgirls.site"
+        "SITE_URL": "https://ai.klccgirls.site"
       },
       "observability": {
         "enabled": true
