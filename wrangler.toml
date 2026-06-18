@@ -1,0 +1,44 @@
+name = "telegram-bot"
+main = "worker.js"
+compatibility_date = "2024-12-18"
+compatibility_flags = ["nodejs_compat"]
+
+# ===== OBSERVABILITY CONFIGURATION =====
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+persist = true
+invocation_logs = true
+
+[observability.traces]
+enabled = true
+persist = true
+head_sampling_rate = 1
+
+# ===== ENVIRONMENT VARIABLES =====
+[vars]
+BOT_TOKEN = "8571106564:AAEPU8Scs24zR2tE36KeBZWG-UrBPCVOlt0"
+CHANNEL_URL = "https://t.me/+AEYJNkeLS0dhOTQ9"
+AI_MODEL = "@cf/meta/llama-3-8b-instruct"
+
+# ===== PRODUCTION ENVIRONMENT =====
+[env.production]
+vars = { 
+  BOT_TOKEN = "8571106564:AAEPU8Scs24zR2tE36KeBZWG-UrBPCVOlt0",
+  CHANNEL_URL = "https://t.me/+AEYJNkeLS0dhOTQ9",
+  AI_MODEL = "@cf/meta/llama-3-8b-instruct"
+}
+
+# ===== AI BINDING =====
+[[ai]]
+binding = "AI"
+
+# ===== KV NAMESPACE (optional - for storing chat history) =====
+[[kv_namespaces]]
+binding = "CHAT_HISTORY"
+id = "your-kv-namespace-id"  # Create this in Cloudflare Dashboard
+preview_id = "your-kv-preview-id"
